@@ -520,7 +520,12 @@ void MouseDockSetModeSpectrum(const Napi::CallbackInfo &info) {
 
 void MouseDockSetModeBreathe(const Napi::CallbackInfo &info) {
     RazerDevice device = getRazerDeviceFor(info);
-    razer_mouse_dock_attr_write_mode_breath(device.usbDevice, "1", 1);
+    Napi::Uint8Array argsArr = info[1].As<Napi::Uint8Array>();
+
+    // Cast unsigned char array into char array
+    char *buf = (char *) info[1].As<Napi::Uint8Array>().Data();
+
+    razer_mouse_dock_attr_write_mode_breath(device.usbDevice, buf, argsArr.ElementLength());
 }
 
 void MouseDockSetModeNone(const Napi::CallbackInfo &info) {

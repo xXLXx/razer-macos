@@ -12,7 +12,10 @@ export class RazerDeviceMouseDock extends RazerDevice {
 
   setModeStaticNoStore(color) {
     super.setModeStaticNoStore(color);
-    this.addon.mouseDockSetModeStaticNoStore(this.internalId, new Uint8Array(color));
+    this.addon.mouseDockSetModeStaticNoStore(
+      this.internalId,
+      new Uint8Array(color)
+    );
   }
 
   setModeStatic(color) {
@@ -26,7 +29,9 @@ export class RazerDeviceMouseDock extends RazerDevice {
   }
 
   setBreathe(color) {
-    super.setBreathe(color);
-    this.addon.mouseDockSetModeBreathe(this.internalId, new Uint8Array(color));
+    this.addon.mouseDockSetModeBreathe(
+      this.internalId,
+      new Uint8Array([...color, ...color])
+    );
   }
 }
